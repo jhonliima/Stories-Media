@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { WebView } from "react-native-webview";
+//import { WebView } from "react-native-webview";
 import Modal from "react-native-modalbox";
 import GestureRecognizer from "react-native-swipe-gestures";
 import Story from "./Story";
@@ -35,9 +35,8 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
   const [isModelOpen, setModel] = useState(false);
   const [isPause, setIsPause] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
+  const [duration, setDuration] = useState(3);
   const story = stories.length ? stories[currentIndex] : {};
-  const [duration, setDuration] = useState(story.duration ? story.duration : 3);
-
   const { isReadMore }: StoryType = story || {};
 
   // const onVideoLoaded = (length) => {
@@ -51,12 +50,12 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
       prevStory();
     }
   };
-  //console.log('Storie que tá tocando', story )
+
   const nextStory = () => {
     if (stories.length - 1 > currentIndex) {
       setCurrentIndex(currentIndex + 1);
       setLoaded(false);
-      setDuration(story.duration ? story.duration : 3);
+      setDuration(3);
     } else {
       setCurrentIndex(0);
       props.onStoryNext(false);
@@ -67,7 +66,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
     if (currentIndex > 0 && stories.length) {
       setCurrentIndex(currentIndex - 1);
       setLoaded(false);
-      setDuration(story.duration ? story.duration : 3);
+      setDuration(3);
     } else {
       setCurrentIndex(0);
       props.onStoryPrevious(false);
@@ -75,6 +74,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
   };
 
   const onImageLoaded = () => {
+
     setLoaded(true);
   };
 
@@ -96,23 +96,6 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
     setModel(false);
   };
 
-  const loading = () => {
-    if (!isLoaded) {
-      return (
-        <View style={styles.loading}>
-          <View>
-            <Story
-              onImageLoaded={onImageLoaded}
-              pause
-              onVideoLoaded={onVideoLoaded}
-              story={story}
-            />
-          </View>
-          <ActivityIndicator color="white" />
-        </View>
-      );
-    }
-  };
 
   const config = {
     velocityThreshold: 0.3,
@@ -149,6 +132,8 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
         style={styles.container}
       >
         <View style={styles.container}>
+   
+      
           <Story
             onImageLoaded={onImageLoaded}
             pause={isPause}
@@ -157,20 +142,13 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
             story={story}
           />
 
-          {loading()}
-
-          <UserView
+<UserView
             name={dataStories.username}
             profile={dataStories.profile}
             datePublication={stories[currentIndex].created}
             onClosePress={props.onClose}
           />
-
-          {isReadMore && (
-            <Readmore title={props.textReadMore} onReadMore={onReadMoreOpen} />
-          )}
-
-          <ProgressArray
+<ProgressArray
             next={nextStory}
             isLoaded={isLoaded}
             duration={duration}
@@ -182,17 +160,25 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
             length={stories.map((_, i) => i)}
             progress={{ id: currentIndex }}
           />
-        </View>
 
-        <Modal
-          style={styles.modal}
-          position="bottom"
-          isOpen={isModelOpen}
-          onClosed={onReadMoreClose}
-        >
-          <View style={styles.bar} />
-          <WebView source={{ uri: stories[currentIndex].url_readmore }} />
-        </Modal>
+       
+{/* 
+          {isReadMore && (
+            <Readmore title={props.textReadMore} onReadMore={onReadMoreOpen} />
+          )} */}
+
+        </View>
+{
+        // <Modal
+        //   style={styles.modal}
+        //   position="bottom"
+        //   isOpen={isModelOpen}
+        //   onClosed={onReadMoreClose}
+        // >
+        //   <View style={styles.bar} />
+        //   {/* <WebView source={{ uri: stories[currentIndex].url_readmore }} /> */}
+        // </Modal>
+        }
       </TouchableOpacity>
     </GestureRecognizer>
   );

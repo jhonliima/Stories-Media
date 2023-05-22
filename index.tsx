@@ -20,21 +20,24 @@ type Props = {
   avatarStyle?: StyleSheet.Styles;
   titleStyle?: StyleSheet.Styles;
   textReadMore?: string;
+  isModelOpen: boolean; 
+  setModel: (bool: boolean) => any;
 };
 
 const Stories = (props: Props) => {
-  const [isModelOpen, setModel] = useState(false);
+
   const [currentUserIndex, setCurrentUserIndex] = useState(0);
   const [currentScrollValue, setCurrentScrollValue] = useState(0);
   const modalScroll = useRef(null);
 
-  const onStorySelect = (index) => {
-    setCurrentUserIndex(index);
-    setModel(true);
-  };
+useEffect(() => {
+if(props.isModelOpen) {
+  setCurrentUserIndex(0)
+}
+},[props.isModelOpen])
 
   const onStoryClose = () => {
-    setModel(false);
+    props.setModel(false);
   };
 
   const onStoryNext = (isScroll: boolean) => {
@@ -50,7 +53,7 @@ const Stories = (props: Props) => {
         }
       }
     } else {
-      setModel(false);
+     props. setModel(false);
     }
   };
 
@@ -79,30 +82,12 @@ const Stories = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={props.data}
-        horizontal
-        keyExtractor={(item) => item.title}
-        renderItem={({ item, index }) => (
-          <View style={styles.boxStory}>
-            <TouchableOpacity onPress={() => onStorySelect(index)}>
-              <View style={[styles.superCircle, props.containerAvatarStyle]}>
-                <Image
-                  style={[styles.circle, props.avatarStyle]}
-                  source={{ uri: item.profile }}
-                />
-              </View>
-
-              <Text style={[styles.title, props.titleStyle]}>{item.title}</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+   
 
       <Modal
         animationType="slide"
         transparent={false}
-        visible={isModelOpen}
+        visible={props.isModelOpen}
         style={styles.modal}
         onShow={() => {
           if (currentUserIndex > 0) {
