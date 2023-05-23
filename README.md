@@ -34,23 +34,6 @@ A simple and fully customizable React Native components that provides a status/s
 | --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
 | ![](demo/screen0.png) | ![](demo/screen4.png) | ![](demo/screen2.png) | ![](demo/screen5.png) | ![](demo/screen3.png) |
 
-<br>
-
-## Installation
-
-If using yarn:
-
-```
-yarn add react-native-stories-media
-```
-
-If using npm:
-
-```
-npm i react-native-stories-media
-```
-
-<br>
 
 ## Usage
 
@@ -208,9 +191,10 @@ const data = [
 ];
 
 export default function Demo() {
+    const [isModelOpen, setModel] = React.useState(false);
   return (
     <View style={{ flex: 1, paddingVertical: 20 }}>
-      <Stories data={data} />
+     <Stories isModelOpen={isModelOpen} setModel={setModel} data={data} />
     </View>
   );
 }
