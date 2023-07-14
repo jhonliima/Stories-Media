@@ -1,7 +1,7 @@
 {
-  "name": "react-native-stories-media",
-  "version": "0.0.7",
-  "description": "Stories for React native Like Instagram, Whatsapp and Twitter",
+  "name": "react-native-stories-trabbe",
+  "version": "0.0.8",
+  "description": "Stories",
   "main": "index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,10 +11,7 @@
     "stories",
     "stories instagram"
   ],
-  "bugs": {
-    "url": "https://github.com/iguilhermeluis/react-native-stories-media/issues"
-  },
-  "homepage": "https://github.com/iguilhermeluis/react-native-stories-media/blob/master/README.md",
+  "homepage": "https://github.com/jhonliima/Stories-Media/blob/main/README.md",
   "peerDependencies": {
     "react": ">=15.0.0",
     "react-native": "*"
@@ -47,8 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iguilhermeluis/react-native-stories-media"
+    "url": "git+https://github.com/jhonliima/Stories-Media"
   },
-  "author": "Guilherme Faustino <contato@guilhermeluis.com> (https://github.com/iguilhermeluis)",
   "license": "MIT"
 }
