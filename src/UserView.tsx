@@ -5,7 +5,6 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 type Props = {
   onClosePress: () => void;
-  profile: string;
   name: string;
   datePublication: string;
 };
@@ -34,14 +33,9 @@ const diffDateWithNow = (date) => {
 export default memo(function UserView(props: Props) {
   return (
     <View style={styles.userView}>
-      <Image source={{ uri: props.profile }} style={styles.image} />
       <View style={{ flex: 1 }}>
         <View style={styles.barUsername}>
           <Text style={styles.name}>{props.name}</Text>
-          <Image
-            source={require("./imgs/verify_icon.png")}
-            style={styles.verifyIcon}
-          />
         </View>
 
         <Text style={styles.time}>

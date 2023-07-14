@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  ActivityIndicator,
   Dimensions,
   NativeTouchEvent,
   StyleSheet,
@@ -8,21 +7,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-//import { WebView } from "react-native-webview";
-import Modal from "react-native-modalbox";
 import GestureRecognizer from "react-native-swipe-gestures";
 import Story from "./Story";
 import UserView from "./UserView";
-import Readmore from "./Readmore";
 import ProgressArray from "./ProgressArray";
 import { StoriesType, StoryType } from ".";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 type Props = {
-  dataStories: StoriesType;
-  onStoryNext: (boolean) => void;
-  onStoryPrevious: (boolean) => void;
+  dataStories: [StoriesType];
+  onStoryNext: (boolean: Boolean) => void;
+  onStoryPrevious: (boolean: Boolean) => void;
   onClose: () => void;
   isNewStory: boolean;
   textReadMore: string;
@@ -30,18 +26,12 @@ type Props = {
 
 const StoryContainer: React.FC<Props> = (props: Props) => {
   const { dataStories } = props;
-  const { stories = [] } = dataStories || {};
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModelOpen, setModel] = useState(false);
   const [isPause, setIsPause] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
   const [duration, setDuration] = useState(3);
-  const story = stories.length ? stories[currentIndex] : {};
-  const { isReadMore }: StoryType = story || {};
-
-  // const onVideoLoaded = (length) => {
-  //   props.onVideoLoaded(length.duration);
-  // };
+  const story = dataStories[currentIndex] as StoryType;
 
   const changeStory = (evt: NativeTouchEvent) => {
     if (evt.locationX > SCREEN_WIDTH / 2) {
@@ -52,7 +42,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
   };
 
   const nextStory = () => {
-    if (stories.length - 1 > currentIndex) {
+    if (dataStories.length - 1 > currentIndex) {
       setCurrentIndex(currentIndex + 1);
       setLoaded(false);
       setDuration(3);
@@ -63,7 +53,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
   };
 
   const prevStory = () => {
-    if (currentIndex > 0 && stories.length) {
+    if (currentIndex > 0 && dataStories.length) {
       setCurrentIndex(currentIndex - 1);
       setLoaded(false);
       setDuration(3);
@@ -74,28 +64,18 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
   };
 
   const onImageLoaded = () => {
-
     setLoaded(true);
   };
 
-  const onVideoLoaded = (length) => {
-    setLoaded(true);
+  const onVideoLoaded = (length: any) => {
     setDuration(length.duration);
+
+    setLoaded(true);
   };
 
-  const onPause = (result) => {
+  const onPause = (result: any) => {
     setIsPause(result);
   };
-
-  const onReadMoreOpen = () => {
-    setIsPause(true);
-    setModel(true);
-  };
-  const onReadMoreClose = () => {
-    setIsPause(false);
-    setModel(false);
-  };
-
 
   const config = {
     velocityThreshold: 0.3,
@@ -111,7 +91,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
   };
 
   const onSwipeUp = () => {
-    if (!isModelOpen && isReadMore) {
+    if (!isModelOpen) {
       setModel(true);
     }
   };
@@ -132,8 +112,6 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
         style={styles.container}
       >
         <View style={styles.container}>
-   
-      
           <Story
             onImageLoaded={onImageLoaded}
             pause={isPause}
@@ -142,43 +120,24 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
             story={story}
           />
 
-<UserView
-            name={dataStories.username}
-            profile={dataStories.profile}
-            datePublication={stories[currentIndex].created}
+          <UserView
+            name={story?.ds_nome}
+            datePublication={story?.createdAt}
             onClosePress={props.onClose}
           />
-<ProgressArray
+          <ProgressArray
             next={nextStory}
             isLoaded={isLoaded}
             duration={duration}
             pause={isPause}
             isNewStory={props.isNewStory}
-            stories={stories}
+            stories={dataStories}
             currentIndex={currentIndex}
-            currentStory={stories[currentIndex]}
-            length={stories.map((_, i) => i)}
+            currentStory={dataStories[currentIndex]}
+            length={dataStories.map((_, i) => i)}
             progress={{ id: currentIndex }}
           />
-
-       
-{/* 
-          {isReadMore && (
-            <Readmore title={props.textReadMore} onReadMore={onReadMoreOpen} />
-          )} */}
-
         </View>
-{
-        // <Modal
-        //   style={styles.modal}
-        //   position="bottom"
-        //   isOpen={isModelOpen}
-        //   onClosed={onReadMoreClose}
-        // >
-        //   <View style={styles.bar} />
-        //   {/* <WebView source={{ uri: stories[currentIndex].url_readmore }} /> */}
-        // </Modal>
-        }
       </TouchableOpacity>
     </GestureRecognizer>
   );

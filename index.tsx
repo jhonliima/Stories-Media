@@ -1,13 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import {
-  FlatList,
-  Image,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Modal, StyleSheet, View } from "react-native";
 import { StoryType } from "./src";
 
 const { CubeNavigationHorizontal } = require("react-native-3dcube-navigation");
@@ -20,21 +12,20 @@ type Props = {
   avatarStyle?: StyleSheet.Styles;
   titleStyle?: StyleSheet.Styles;
   textReadMore?: string;
-  isModelOpen: boolean; 
+  isModelOpen: boolean;
   setModel: (bool: boolean) => any;
 };
 
 const Stories = (props: Props) => {
-
   const [currentUserIndex, setCurrentUserIndex] = useState(0);
   const [currentScrollValue, setCurrentScrollValue] = useState(0);
   const modalScroll = useRef(null);
 
-useEffect(() => {
-if(props.isModelOpen) {
-  setCurrentUserIndex(0)
-}
-},[props.isModelOpen])
+  useEffect(() => {
+    if (props.isModelOpen) {
+      setCurrentUserIndex(0);
+    }
+  }, [props.isModelOpen]);
 
   const onStoryClose = () => {
     props.setModel(false);
@@ -53,7 +44,7 @@ if(props.isModelOpen) {
         }
       }
     } else {
-     props. setModel(false);
+      props.setModel(false);
     }
   };
 
@@ -70,20 +61,18 @@ if(props.isModelOpen) {
   const onScrollChange = (scrollValue) => {
     if (currentScrollValue > scrollValue) {
       onStoryNext(true);
-      console.log("next");
+
       setCurrentScrollValue(scrollValue);
     }
     if (currentScrollValue < scrollValue) {
       onStoryPrevious(false);
-      console.log("previous");
+
       setCurrentScrollValue(scrollValue);
     }
   };
 
   return (
     <View style={styles.container}>
-   
-
       <Modal
         animationType="slide"
         transparent={false}

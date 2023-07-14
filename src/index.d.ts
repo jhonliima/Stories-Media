@@ -15,6 +15,9 @@ export type StoryType = {
   created?: string;
   storyid?: number;
   title?: string;
+  ds_arquivo?: string;
+  createdAt?: string;
+  ds_nome?: string;
 };
 
 export type StoriesType = {
@@ -23,4 +26,5 @@ export type StoriesType = {
   title?: string;
   storyid?: number;
   stories?: Array<StoryType>;
+  
 };
