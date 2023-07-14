@@ -5,7 +5,7 @@
 ```js
 import React from "react";
 import { View } from "react-native";
-import Stories from "react-native-stories-media";
+import Stories from "react-native-stories-trabbe";
 
 const data = [
   {
