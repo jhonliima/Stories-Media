@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 
 import GestureRecognizer from "react-native-swipe-gestures";
@@ -21,7 +22,6 @@ type Props = {
   onStoryPrevious: (boolean: Boolean) => void;
   onClose: () => void;
   isNewStory: boolean;
-  textReadMore: string;
 };
 
 const StoryContainer: React.FC<Props> = (props: Props) => {
@@ -111,7 +111,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
         onPressOut={() => onPause(false)}
         style={styles.container}
       >
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           <Story
             onImageLoaded={onImageLoaded}
             pause={isPause}
@@ -137,7 +137,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
             length={dataStories.map((_, i) => i)}
             progress={{ id: currentIndex }}
           />
-        </View>
+        </SafeAreaView>
       </TouchableOpacity>
     </GestureRecognizer>
   );
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "flex-start",
     alignItems: "center",
-    // paddingTop: 30,
+    
   },
   progressBarArray: {
     flexDirection: "row",

@@ -56,8 +56,8 @@ const Story = (props: Props) => {
           source={{ uri: ds_arquivo }}
           onLoadEnd={props.onImageLoaded}
           style={styles.content}
-          resizeMode="stretch"
-          // width={ScreenWidth}
+          resizeMode="contain"
+         
         />
       )}
     </View>
