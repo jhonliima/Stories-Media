@@ -4,12 +4,12 @@ import { Dimensions, Image, StyleSheet, View } from "react-native";
 import Video from "react-native-video";
 import PropTypes from "prop-types";
 import { StoryType } from ".";
-
+import FastImage from 'react-native-fast-image'
 const ScreenWidth = Dimensions.get("window").width;
 
 type Props = {
   story: StoryType;
-  onVideoLoaded?: (Object: any) => void;
+  onVideoLoaded: (Object: any) => void;
   onImageLoaded?: () => void;
   pause: boolean;
   isLoaded?: boolean;
@@ -20,6 +20,7 @@ const Story = (props: Props) => {
   const { ds_arquivo } = story || {};
   const [isPortation, setIsPortation] = useState(false);
   const [heightScaled, setHeightScaled] = useState(231);
+
   let type = ds_arquivo
     ?.split(".")
     ?.pop()
@@ -33,8 +34,8 @@ const Story = (props: Props) => {
         <Video
           source={{ uri: ds_arquivo }}
           paused={props.pause || props.isNewStory}
-          onBuffer={(w) => {}}
-          onProgress={(asd) => {}}
+          onBuffer={(w) => { }}
+          onProgress={(asd) => { }}
           playInBackground
           onLoad={(item) => {
             const { width, height } = item.naturalSize;
@@ -52,12 +53,11 @@ const Story = (props: Props) => {
           resizeMode={"stretch"}
         />
       ) : (
-        <Image
-          source={{ uri: ds_arquivo }}
+        <FastImage
+          source={{ uri: ds_arquivo, priority: FastImage.priority.high }}
           onLoadEnd={props.onImageLoaded}
           style={styles.content}
-          resizeMode="contain"
-         
+
         />
       )}
     </View>
@@ -72,23 +72,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    backgroundColor: "black",
+
     justifyContent: "center",
     alignItems: "center",
   },
-  content: { width: "100%", height: "100%", flex: 1 },
+  content: { width: "100%", height: "100%", },
   contentVideo: {
     width: ScreenWidth + 20,
-    //aspectRatio: 1,
     backgroundColor: "#000",
-    //flex: 1,
     height: 231,
   },
   contentVideoPortation: {
     width: ScreenWidth + 20,
-    //aspectRatio: 1,
     backgroundColor: "#000",
-    //flex: 1,
     height: 231,
   },
   imageContent: {

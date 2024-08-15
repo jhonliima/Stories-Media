@@ -44,7 +44,7 @@ const ProgressBar = (props: Props) => {
       default:
         return scale.setValue(0);
     }
-  });
+  },[active,props.isNewStory,props.isLoaded ]);
 
   const getDuration = () => {
     const totalPlaytime = Math.ceil(duration) * 1000;

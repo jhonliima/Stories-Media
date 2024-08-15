@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import { Modal, StyleSheet, View } from "react-native";
 import { StoryType } from "./src";
 
-const { CubeNavigationHorizontal } = require("react-native-3dcube-navigation");
-
 import StoryContainer from "./src/StoryContainer";
 
 type Props = {
@@ -18,7 +16,6 @@ type Props = {
 
 const Stories = (props: Props) => {
   const [currentUserIndex, setCurrentUserIndex] = useState(0);
-  const [currentScrollValue, setCurrentScrollValue] = useState(0);
   const modalScroll = useRef(null);
 
   useEffect(() => {
@@ -58,18 +55,7 @@ const Stories = (props: Props) => {
     }
   };
 
-  const onScrollChange = (scrollValue) => {
-    if (currentScrollValue > scrollValue) {
-      onStoryNext(true);
-
-      setCurrentScrollValue(scrollValue);
-    }
-    if (currentScrollValue < scrollValue) {
-      onStoryPrevious(false);
-
-      setCurrentScrollValue(scrollValue);
-    }
-  };
+ 
 
   return (
     <View style={styles.container}>
@@ -85,11 +71,6 @@ const Stories = (props: Props) => {
         }}
         onRequestClose={onStoryClose}
       >
-        <CubeNavigationHorizontal
-          callBackAfterSwipe={(g) => onScrollChange(g)}
-          ref={modalScroll}
-          style={styles.container}
-        >
           {props.data.map((item, index) => (
             <StoryContainer
               key={item.title}
@@ -101,13 +82,12 @@ const Stories = (props: Props) => {
               textReadMore={props.textReadMore}
             />
           ))}
-        </CubeNavigationHorizontal>
       </Modal>
     </View>
   );
 };
 
-const styles = new StyleSheet.create({
+const styles =  StyleSheet.create({
   boxStory: {
     marginLeft: 15,
   },
