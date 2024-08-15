@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { StoryType } from ".";
 import FastImage from 'react-native-fast-image'
 const ScreenWidth = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 type Props = {
   story: StoryType;
@@ -57,7 +58,7 @@ const Story = (props: Props) => {
           source={{ uri: ds_arquivo, priority: FastImage.priority.high }}
           onLoadEnd={props.onImageLoaded}
           style={styles.content}
-
+          resizeMode="stretch"
         />
       )}
     </View>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  content: { width: "100%", height: "100%", },
+  content: { width: "100%", height:height, },
   contentVideo: {
     width: ScreenWidth + 20,
     backgroundColor: "#000",

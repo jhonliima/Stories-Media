@@ -111,7 +111,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
         onPressOut={() => onPause(false)}
         style={styles.container}
       >
-        <SafeAreaView style={styles.container}>
+    
           <Story
             onImageLoaded={onImageLoaded}
             pause={isPause}
@@ -119,17 +119,13 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
             onVideoLoaded={onVideoLoaded}
             story={story}
           />
-
-          <UserView
-            name={story?.ds_nome}
-            datePublication={story?.createdAt}
-            onClosePress={props.onClose}
-          />
           <ProgressArray
             next={nextStory}
             isLoaded={isLoaded}
             duration={duration}
             pause={isPause}
+            story={story}
+            onClosePress={props.onClose}
             isNewStory={props.isNewStory}
             stories={dataStories}
             currentIndex={currentIndex}
@@ -137,7 +133,7 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
             length={dataStories.map((_, i) => i)}
             progress={{ id: currentIndex }}
           />
-        </SafeAreaView>
+      
       </TouchableOpacity>
     </GestureRecognizer>
   );

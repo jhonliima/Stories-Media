@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { Animated, StyleSheet } from "react-native";
+import { Animated, StyleSheet, View } from "react-native";
 import ProgressBar from "./ProgressBar";
-
+import UserView from "./UserView";
+import {  StoryType } from ".";
 type Props = {
   next: () => void;
   pause: boolean;
@@ -13,6 +14,9 @@ type Props = {
   currentIndex: number;
   length: Array<number>;
   progress: Object;
+  story: StoryType;
+  onClosePress: () => void;
+
 };
 
 const ProgressArray = (props: Props) => {
@@ -35,7 +39,8 @@ const ProgressArray = (props: Props) => {
   }, [props.pause]);
 
   return (
-    <Animated.View style={[styles.progressBarArray, { opacity }]}>
+   
+ <Animated.View style={[styles.progressBarArray, { opacity }]}>
       {props.length.map((i: number, index) => (
         <ProgressBar
           index={index}
@@ -50,7 +55,14 @@ const ProgressArray = (props: Props) => {
           pause={props.pause}
         />
       ))}
+       <UserView
+            name={props.story?.ds_nome}
+            datePublication={props?.story?.createdAt}
+            onClosePress={props.onClosePress}
+          />
     </Animated.View>
+   
+   
   );
 };
 
@@ -58,11 +70,11 @@ const styles = StyleSheet.create({
   progressBarArray: {
     flexDirection: "row",
     position: "absolute",
-    top: 30,
-    width: "98%",
-    height: 10,
+    top: 60,
+    width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
+
   },
 });
 

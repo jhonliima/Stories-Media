@@ -5,8 +5,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 type Props = {
   onClosePress: () => void;
-  name: string;
-  datePublication: string;
+  name?: string;
+  datePublication?: string;
 };
 
 const diffDateWithNow = (date) => {
@@ -35,7 +35,7 @@ export default memo(function UserView(props: Props) {
     <View style={styles.userView}>
       <View style={{ flex: 1 }}>
         <View style={styles.barUsername}>
-          <Text style={styles.name}>{props.name}</Text>
+          <Text numberOfLines={1} style={styles.name}>{props.name}</Text>
         </View>
 
         <Text style={styles.time}>
@@ -44,7 +44,7 @@ export default memo(function UserView(props: Props) {
         </Text>
       </View>
       <TouchableOpacity onPress={props.onClosePress}>
-        <Icon name="close" color="white" size={25} style={{ marginRight: 8 }} />
+        <Icon name="close" color="white" size={40} style={{ marginRight: 8 }} />
       </TouchableOpacity>
     </View>
   );
@@ -69,18 +69,21 @@ const styles = StyleSheet.create({
   userView: {
     flexDirection: "row",
     position: "absolute",
-    top: 55,
-    width: "98%",
+    top: 10,
+    width: "100%",
     alignItems: "center",
+    paddingVertical: 10,
+  backgroundColor: '#00000040'
   },
   name: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: "bold",
     marginLeft: 12,
     color: "white",
+
   },
   time: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "400",
     marginTop: 3,
     marginLeft: 12,
