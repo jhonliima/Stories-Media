@@ -24,6 +24,21 @@ const ProgressBar = (props: Props) => {
     setWidth(evt.width);
   };
 
+  const getDuration = () => {
+    const totalPlaytime = Math.ceil(duration) * 1000;
+
+    if (props.pause) {
+      return 50000;
+    }
+
+    if (pauseTime === null) {
+      return totalPlaytime;
+    }
+
+    const lastTime = pauseTime - startTime;
+    return totalPlaytime - lastTime;
+  };
+
   useEffect(() => {
     switch (active) {
       case 2:
@@ -44,22 +59,7 @@ const ProgressBar = (props: Props) => {
       default:
         return scale.setValue(0);
     }
-  },[active,props.isNewStory,props.isLoaded ]);
-
-  const getDuration = () => {
-    const totalPlaytime = Math.ceil(duration) * 1000;
-
-    if (props.pause) {
-      return 50000;
-    }
-
-    if (pauseTime === null) {
-      return totalPlaytime;
-    }
-
-    const lastTime = pauseTime - startTime;
-    return totalPlaytime - lastTime;
-  };
+  }, [active, props.isNewStory, props.isLoaded, props.pause]);
 
   useEffect(() => {
     if (index === currentIndex) {

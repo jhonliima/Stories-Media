@@ -3,14 +3,11 @@ import {
   Dimensions,
   NativeTouchEvent,
   StyleSheet,
-  View,
   TouchableOpacity,
-  SafeAreaView,
 } from "react-native";
 
 import GestureRecognizer from "react-native-swipe-gestures";
 import Story from "./Story";
-import UserView from "./UserView";
 import ProgressArray from "./ProgressArray";
 import { StoriesType, StoryType } from ".";
 
@@ -111,29 +108,29 @@ const StoryContainer: React.FC<Props> = (props: Props) => {
         onPressOut={() => onPause(false)}
         style={styles.container}
       >
-    
-          <Story
-            onImageLoaded={onImageLoaded}
-            pause={isPause}
-            isNewStory={props.isNewStory}
-            onVideoLoaded={onVideoLoaded}
-            story={story}
-          />
-          <ProgressArray
-            next={nextStory}
-            isLoaded={isLoaded}
-            duration={duration}
-            pause={isPause}
-            story={story}
-            onClosePress={props.onClose}
-            isNewStory={props.isNewStory}
-            stories={dataStories}
-            currentIndex={currentIndex}
-            currentStory={dataStories[currentIndex]}
-            length={dataStories.map((_, i) => i)}
-            progress={{ id: currentIndex }}
-          />
-      
+        <Story
+          onImageLoaded={onImageLoaded}
+          pause={isPause}
+          isNewStory={props.isNewStory}
+          onVideoLoaded={onVideoLoaded}
+          story={story}
+          onPause={onPause}
+          isLoaded={isLoaded}
+        />
+        <ProgressArray
+          next={nextStory}
+          isLoaded={isLoaded}
+          duration={duration}
+          pause={isPause}
+          story={story}
+          onClosePress={props.onClose}
+          isNewStory={props.isNewStory}
+          stories={dataStories}
+          currentIndex={currentIndex}
+          currentStory={dataStories[currentIndex]}
+          length={dataStories.map((_, i) => i)}
+          progress={{ id: currentIndex }}
+        />
       </TouchableOpacity>
     </GestureRecognizer>
   );
@@ -145,7 +142,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "flex-start",
     alignItems: "center",
-    
   },
   progressBarArray: {
     flexDirection: "row",

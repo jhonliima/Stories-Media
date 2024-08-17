@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { memo } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 type Props = {
@@ -35,7 +35,9 @@ export default memo(function UserView(props: Props) {
     <View style={styles.userView}>
       <View style={{ flex: 1 }}>
         <View style={styles.barUsername}>
-          <Text numberOfLines={1} style={styles.name}>{props.name}</Text>
+          <Text numberOfLines={1} style={styles.name}>
+            {props.name}
+          </Text>
         </View>
 
         <Text style={styles.time}>
@@ -73,14 +75,13 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     paddingVertical: 10,
-  backgroundColor: '#00000040'
+    backgroundColor: "#00000040",
   },
   name: {
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 12,
     color: "white",
-
   },
   time: {
     fontSize: 14,

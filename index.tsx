@@ -33,12 +33,9 @@ const Stories = (props: Props) => {
     if (props.data.length - 1 > currentUserIndex) {
       setCurrentUserIndex(newIndex);
       if (!isScroll) {
-        //erro aqui
         try {
           modalScroll.current.scrollTo(newIndex, true);
-        } catch (e) {
-          console.warn("error=>", e);
-        }
+        } catch (e) {}
       }
     } else {
       props.setModel(false);
@@ -55,8 +52,6 @@ const Stories = (props: Props) => {
     }
   };
 
- 
-
   return (
     <View style={styles.container}>
       <Modal
@@ -71,23 +66,23 @@ const Stories = (props: Props) => {
         }}
         onRequestClose={onStoryClose}
       >
-          {props.data.map((item, index) => (
-            <StoryContainer
-              key={item.title}
-              onClose={onStoryClose}
-              onStoryNext={onStoryNext}
-              onStoryPrevious={onStoryPrevious}
-              dataStories={item}
-              isNewStory={index !== currentUserIndex}
-              textReadMore={props.textReadMore}
-            />
-          ))}
+        {props.data.map((item, index) => (
+          <StoryContainer
+            key={item.title}
+            onClose={onStoryClose}
+            onStoryNext={onStoryNext}
+            onStoryPrevious={onStoryPrevious}
+            dataStories={item}
+            isNewStory={index !== currentUserIndex}
+            textReadMore={props.textReadMore}
+          />
+        ))}
       </Modal>
     </View>
   );
 };
 
-const styles =  StyleSheet.create({
+const styles = StyleSheet.create({
   boxStory: {
     marginLeft: 15,
   },

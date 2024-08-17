@@ -713,6 +713,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@likashefqet/react-native-image-zoom@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@likashefqet/react-native-image-zoom/-/react-native-image-zoom-4.0.0.tgz#03559afaa9e7f3daad9e766defb192112def7f0a"
+  integrity sha512-QG6NzjpmhtU94SQwR5EqAL3ebMhCDoqBpIkObeYe5PjlEr7Emx2119uBoRiBeZLKUXbiePGbV0XvmsGO/YVwBA==
+
 "@types/babel__core@^7.1.0":
   version "7.1.12"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.12.tgz#4d8e9e51eb265552a7e4f1ff2219ab6133bdfb2d"
@@ -3783,6 +3788,11 @@ react-native-3dcube-navigation@^1.0.4:
   integrity sha512-9BGdJDcouWi8a/KqajCOm+gHayXfFhodq8G/mgSMp0363QyZAlP7iPtYjL6mkaUcR8JAjzgCREh4CHAAMJmnhw==
   dependencies:
     react "^16.2.0"
+
+react-native-fast-image@^8.6.3:
+  version "8.6.3"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.6.3.tgz#6edc3f9190092a909d636d93eecbcc54a8822255"
+  integrity sha512-Sdw4ESidXCXOmQ9EcYguNY2swyoWmx53kym2zRsvi+VeFCHEdkO+WG1DK+6W81juot40bbfLNhkc63QnWtesNg==
 
 react-native-modalbox@^1.7.1:
   version "1.7.1"
