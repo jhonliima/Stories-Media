@@ -1,12 +1,11 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { useState } from "react";
-import { ActivityIndicator, Dimensions, StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import Video from "react-native-video";
 import PropTypes from "prop-types";
 import { StoryType } from ".";
 import FastImage from "react-native-fast-image";
 import { Zoomable } from "@likashefqet/react-native-image-zoom";
-
 const ScreenWidth = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -85,23 +84,15 @@ const Story = (props: Props) => {
           style={styles.content}
         >
           <FastImage
-            fallback
             source={{ uri: ds_arquivo, priority: FastImage.priority.high }}
             onLoadEnd={() => {
               props.onImageLoaded();
               onLoadEnd();
             }}
             style={styles.content}
-            onLoadStart={onLoadStart}
+            // onLoadStart={onLoadStart}
             resizeMode="stretch"
           />
-          {isLoading && (
-            <ActivityIndicator
-              color={"red"}
-              style={styles.loaderStyle}
-              size={"large"}
-            />
-          )}
         </Zoomable>
       )}
     </View>

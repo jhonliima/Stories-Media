@@ -41,6 +41,7 @@ const ProgressArray = (props: Props) => {
     <Animated.View style={[styles.progressBarArray, { opacity }]}>
       {props.length.map((i, index) => (
         <ProgressBar
+          key={String(index)}
           index={index}
           duration={props.duration || 3}
           isNewStory={props.isNewStory}

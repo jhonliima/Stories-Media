@@ -1,11 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Modal, StyleSheet, View } from "react-native";
+import { Modal, StyleSheet, View, Image } from "react-native";
 import { StoryType } from "./src";
 
 import StoryContainer from "./src/StoryContainer";
+import FastImage from "react-native-fast-image";
 
 type Props = {
-  data: StoryType[];
+  data: StoryType[][];
   containerAvatarStyle?: StyleSheet.Styles;
   avatarStyle?: StyleSheet.Styles;
   titleStyle?: StyleSheet.Styles;
@@ -17,6 +18,19 @@ type Props = {
 const Stories = (props: Props) => {
   const [currentUserIndex, setCurrentUserIndex] = useState(0);
   const modalScroll = useRef(null);
+
+  function preloadImages() {
+    if (props?.data[0].length > 0) {
+      const images = props?.data[0].map((item) => ({
+        uri: item.ds_arquivo,
+      }));
+      if (images?.length > 0) FastImage.preload(images);
+    }
+  }
+
+  useEffect(() => {
+    preloadImages();
+  }, [props?.data]);
 
   useEffect(() => {
     if (props.isModelOpen) {
