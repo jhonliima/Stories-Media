@@ -82,7 +82,7 @@ const Stories = (props: Props) => {
       >
         {props.data.map((item, index) => (
           <StoryContainer
-            key={item.title}
+            key={String(index)}
             onClose={onStoryClose}
             onStoryNext={onStoryNext}
             onStoryPrevious={onStoryPrevious}
